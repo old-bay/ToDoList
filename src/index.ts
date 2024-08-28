@@ -1,11 +1,11 @@
 import { v4 as uuidV4 } from 'uuid';
-console.log(uuidV4());
-console.log("hi");
+//console.log(uuidV4());
+//console.log("hi");
 
 type Task =  {
-  id: string,
-  title: string,
-  completed: boolean,
+  id: string
+  title: string
+  completed: boolean
   createdAt: Date
 }
 
@@ -18,7 +18,7 @@ tasks.forEach(addListItem);
 
 form?.addEventListener("submit", e => {
   e.preventDefault();
-  if(input?.value == "" || input?.value == null) return
+  if(input?.value == "" || input?.value == null) return;
   
   const newTask: Task = {
     id: uuidV4(),
@@ -27,7 +27,8 @@ form?.addEventListener("submit", e => {
     createdAt: new Date()
   }
   tasks.push(newTask);
-
+  saveTasks();
+  
   // TS can read implicit types
   addListItem(newTask);
   input.value = ""
@@ -54,6 +55,7 @@ function saveTasks() {
 
 function loadTasks() {
   const taskJSON = localStorage.getItem("TASKS");
-  if(taskJSON === null) return
+  if(taskJSON === null) return [];
   return JSON.parse(taskJSON);
 }
+
